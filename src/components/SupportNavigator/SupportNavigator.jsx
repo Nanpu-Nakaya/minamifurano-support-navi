@@ -57,19 +57,23 @@ const SupportNavigator = () => {
           <div className="flex justify-between mb-6">
             {questions.map((_, index) => (
               <div key={index} className="flex items-center">
+                {/* 丸い数字 - サイズを画面サイズに応じて変更 */}
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center ${
-                    index <= step ? "bg-blue-500 text-white" : "bg-gray-200"
-                  }`}
+                  className={`w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center flex-shrink-0
+              ${index <= step ? "bg-blue-500 text-white" : "bg-gray-200"}
+              text-sm md:text-base`}
                 >
                   {index + 1}
                 </div>
+                {/* 接続線 - 最後の要素以外に表示 */}
                 {index < questions.length - 1 && (
-                  <div
-                    className={`h-1 w-16 ${
-                      index < step ? "bg-blue-500" : "bg-gray-200"
-                    }`}
-                  />
+                  <div className="flex-1 mx-2">
+                    <div
+                      className={`h-1 ${
+                        index < step ? "bg-blue-500" : "bg-gray-200"
+                      }`}
+                    />
+                  </div>
                 )}
               </div>
             ))}
