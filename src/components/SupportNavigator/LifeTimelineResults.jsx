@@ -10,8 +10,6 @@ import {
 import { ChevronLeft, Info } from "lucide-react";
 
 const LifeTimelineResults = ({ results, onReset }) => {
-  const [selectedStage, setSelectedStage] = useState(null);
-
   // 金額フォーマット関数を追加
   const formatMoney = (amount) => {
     return new Intl.NumberFormat("ja-JP", {

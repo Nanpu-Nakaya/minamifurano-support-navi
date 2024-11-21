@@ -98,6 +98,10 @@ export const calculateSupportPrograms = (answers) => {
         timing: 2, // 2年後
       });
       break;
+
+    default:
+      // デフォルトケース：何もしない
+      break;
   }
 
   // 子育て支援 ---------------------------------------------------------------
