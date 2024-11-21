@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   CartesianGrid,
   XAxis,
@@ -10,7 +10,30 @@ import {
 import { ChevronLeft, Info } from "lucide-react";
 
 const LifeTimelineResults = ({ results, onReset }) => {
-  // 金額フォーマット関数を追加
+  // グラフのコンテナ幅を管理するstate
+  const [containerWidth, setContainerWidth] = useState(0);
+  // グラフコンテナへの参照
+  const graphRef = useRef(null);
+
+  // コンポーネントマウント時とリサイズ時に幅を更新
+  useEffect(() => {
+    const updateWidth = () => {
+      if (graphRef.current) {
+        setContainerWidth(graphRef.current.offsetWidth);
+      }
+    };
+
+    // 初回実行
+    updateWidth();
+
+    // リサイズイベントのリスナーを追加
+    window.addEventListener("resize", updateWidth);
+
+    // クリーンアップ関数
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
+
+  // 金額フォーマット関数
   const formatMoney = (amount) => {
     return new Intl.NumberFormat("ja-JP", {
       style: "currency",
@@ -19,26 +42,20 @@ const LifeTimelineResults = ({ results, onReset }) => {
     }).format(amount);
   };
 
-  // ユーザー入力に基づいてライフステージデータを生成
+  // ライフステージデータを生成
   const generateLifeStageData = () => {
     const timeline = [];
     let cumulativeAmount = 0;
-    // 年齢の取得と型変換を確実に行う
     const baseAge = results.userProfile?.user_age
       ? parseInt(results.userProfile.user_age)
       : 30;
 
-    // デバッグ用（あとで消してOK）
-    console.log("User age:", baseAge);
-
-    // 支援プログラムを年齢順にソート
     const sortedPrograms = [...results.programs].sort((a, b) => {
       const timeA = a.timing || 0;
       const timeB = b.timing || 0;
       return timeA - timeB;
     });
 
-    // 各支援金を時系列で追加
     sortedPrograms.forEach((program) => {
       cumulativeAmount += program.amount;
       timeline.push({
@@ -72,68 +89,82 @@ const LifeTimelineResults = ({ results, onReset }) => {
             <p className="text-sm text-gray-600">生涯支援総額（概算）</p>
           </div>
         </div>
-        {/* 累積支援額の推移グラフ */}
+
+        {/* グラフセクション - レスポンシブ対応 */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold mb-4">支援額の推移</h3>
-          <AreaChart
-            width={800}
-            height={300}
-            data={timelineData}
-            margin={{ top: 10, right: 30, left: 50, bottom: 0 }} // 左マージンを増やして金額表示のスペースを確保
-          >
-            <defs>
-              <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.1} />
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis
-              dataKey="age"
-              name="年齢"
-              type="number"
-              domain={["dataMin", "dataMax"]} // データの最小値から最大値までを表示
-              tickCount={5} // 目盛りの数を調整
-              label={{ value: "年齢", position: "bottom" }}
-            />
-            <YAxis
-              name="支援額"
-              tickFormatter={(value) => `${value / 10000}万円`} // 単位を万円で表示
-              domain={[0, "dataMax + 1000000"]} // Y軸の表示範囲を設定
-            />
-            <Tooltip
-              formatter={(value) => formatMoney(value)}
-              labelFormatter={(label) => `${label}歳`}
-              content={({ active, payload, label }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <div className="bg-white p-2 border rounded shadow">
-                      <p className="font-semibold">{`${label}歳時点`}</p>
-                      <p className="text-blue-600">
-                        {`累計支援額: ${formatMoney(payload[0].value)}`}
-                      </p>
-                    </div>
-                  );
-                }
-                return null;
-              }}
-            />
-            <Area
-              type="stepAfter" // ステップ状のグラフに変更
-              dataKey="cumulative"
-              stroke="#3B82F6"
-              strokeWidth={2}
-              fillOpacity={1}
-              fill="url(#colorAmount)"
-            />
-          </AreaChart>
+          <div ref={graphRef} className="w-full overflow-x-auto">
+            <div className="min-w-[320px]">
+              <AreaChart
+                width={containerWidth || 320}
+                height={Math.min(containerWidth * 0.5 || 300, 300)}
+                data={timelineData}
+                margin={{
+                  top: 10,
+                  right: 20,
+                  left: 50,
+                  bottom: 20,
+                }}
+              >
+                <defs>
+                  <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.8} />
+                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.1} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="age"
+                  name="年齢"
+                  type="number"
+                  domain={["dataMin", "dataMax"]}
+                  tickCount={Math.min(5, timelineData.length)}
+                  label={{
+                    value: "年齢",
+                    position: "bottom",
+                    offset: 10,
+                  }}
+                />
+                <YAxis
+                  name="支援額"
+                  tickFormatter={(value) => `${value / 10000}万円`}
+                  domain={[0, "dataMax + 1000000"]}
+                  width={50}
+                />
+                <Tooltip
+                  formatter={(value) => formatMoney(value)}
+                  labelFormatter={(label) => `${label}歳`}
+                  content={({ active, payload, label }) => {
+                    if (active && payload && payload.length) {
+                      return (
+                        <div className="bg-white p-2 border rounded shadow">
+                          <p className="font-semibold">{`${label}歳時点`}</p>
+                          <p className="text-blue-600">
+                            {`累計支援額: ${formatMoney(payload[0].value)}`}
+                          </p>
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                <Area
+                  type="stepAfter"
+                  dataKey="cumulative"
+                  stroke="#3B82F6"
+                  strokeWidth={2}
+                  fillOpacity={1}
+                  fill="url(#colorAmount)"
+                />
+              </AreaChart>
+            </div>
+          </div>
         </div>
 
-        {/* ライフステージタイムライン */}
+        {/* 以下は変更なし - 支援制度一覧 */}
         <div className="mb-8">
           <h3 className="text-lg font-semibold mb-4">対象となる支援制度</h3>
 
-          {/* カテゴリーごとのセクション */}
           {["industry", "housing", "living"].map((category) => {
             const categoryPrograms = results.programs.filter(
               (p) => p.category === category
@@ -155,7 +186,6 @@ const LifeTimelineResults = ({ results, onReset }) => {
                       key={program.id}
                       className="bg-white border rounded-lg p-4 hover:bg-gray-50 transition-colors"
                     >
-                      {/* ヘッダー部分 */}
                       <div className="flex justify-between items-start">
                         <div>
                           <h5 className="font-semibold text-lg">
@@ -165,7 +195,6 @@ const LifeTimelineResults = ({ results, onReset }) => {
                             {program.description}
                           </p>
                         </div>
-                        {/* ここを以下のように変更 */}
                         <div className="text-right">
                           {program.isVariable ? (
                             <>
@@ -191,7 +220,6 @@ const LifeTimelineResults = ({ results, onReset }) => {
                         </div>
                       </div>
 
-                      {/* カテゴリータグ */}
                       <div className="mt-3 flex gap-2">
                         <span
                           className={`inline-block px-2 py-1 text-xs rounded-full ${
@@ -226,7 +254,6 @@ const LifeTimelineResults = ({ results, onReset }) => {
             );
           })}
 
-          {/* 支援金合計 */}
           <div className="bg-blue-50 rounded-lg p-4 mt-6">
             <div className="flex justify-between items-center">
               <span className="font-semibold">支援金合計</span>
@@ -260,6 +287,7 @@ const LifeTimelineResults = ({ results, onReset }) => {
             支援額や条件の詳細は、南富良野町役場の担当窓口にお問い合わせください。
           </p>
         </div>
+
         <button
           onClick={onReset}
           className="mt-6 flex items-center text-blue-500 hover:text-blue-600"
