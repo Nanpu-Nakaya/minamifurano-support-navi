@@ -77,7 +77,7 @@ const LifeTimelineResults = ({ results, onReset }) => {
       <div className="p-6">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold">
-            ライフステージ別 支援制度シミュレーション
+            ライフステージ別<br></br>支援制度シミュレーション
           </h2>
           <p className="text-gray-600 mt-2">
             あなたの人生における支援制度の活用イメージ
@@ -270,22 +270,17 @@ const LifeTimelineResults = ({ results, onReset }) => {
         </div>
 
         <div className="mt-8 space-y-4 text-sm text-gray-500">
-          <p className="flex items-center">
-            <Info className="w-4 h-4 mr-2" />
-            このシミュレーション結果は一般的なケースを想定した概算です。
-          </p>
-          <p className="flex items-center">
-            <Info className="w-4 h-4 mr-2" />
-            実際の支援開始時期は、申請時期や審査状況により変動する場合があります。
-          </p>
-          <p className="flex items-center">
-            <Info className="w-4 h-4 mr-2" />
-            多くの支援制度は次年度からの開始となります。
-          </p>
-          <p className="flex items-center">
-            <Info className="w-4 h-4 mr-2" />
-            支援額や条件の詳細は、南富良野町役場の担当窓口にお問い合わせください。
-          </p>
+          {[
+            "このシミュレーション結果は一般的なケースを想定した概算です。",
+            "実際の支援開始時期は、申請時期や審査状況により変動する場合があります。",
+            "多くの支援制度は次年度からの開始となります。",
+            "支援額や条件の詳細は、南富良野町役場の担当窓口にお問い合わせください。",
+          ].map((text, index) => (
+            <p key={index} className="flex items-start sm:items-center">
+              <Info className="w-[16px] h-[16px] min-w-[16px] mt-[2px] sm:mt-0 mr-2 flex-shrink-0" />
+              <span>{text}</span>
+            </p>
+          ))}
         </div>
 
         <button

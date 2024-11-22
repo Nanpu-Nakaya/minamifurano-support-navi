@@ -80,7 +80,14 @@ const SupportNavigator = () => {
           </div>
 
           <h3 className="text-xl font-semibold mb-6">
-            {currentQuestion.title}
+            {Array.isArray(currentQuestion.title)
+              ? currentQuestion.title.map((line, index) => (
+                  <React.Fragment key={index}>
+                    {line}
+                    {index < currentQuestion.title.length - 1 && <br />}
+                  </React.Fragment>
+                ))
+              : currentQuestion.title}
           </h3>
 
           {currentQuestion.type === "number" ? (
