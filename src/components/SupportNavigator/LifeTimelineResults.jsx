@@ -7,7 +7,76 @@ import {
   Area,
   AreaChart,
 } from "recharts";
-import { ChevronLeft, Info } from "lucide-react";
+import { ChevronLeft, Info, ExternalLink } from "lucide-react";
+import { getSupportPath } from "../../utils/supportMapping";
+
+// 大カテゴリーの日本語変換関数
+const getCategoryLabel = (category, subcategory) => {
+  switch (category) {
+    case "industry":
+      return subcategory === "agriculture" || subcategory === "forestry"
+        ? "農業・林業分野"
+        : "商工分野";
+    case "housing":
+      return "住宅分野";
+    case "living":
+      if (subcategory === "construction" || subcategory === "water") {
+        return "建設・水道分野";
+      } else if (
+        subcategory === "welfare" ||
+        subcategory === "childcare" ||
+        subcategory === "medical"
+      ) {
+        return "保健福祉分野";
+      } else if (subcategory === "education") {
+        return "教育分野";
+      }
+      return subcategory;
+    default:
+      return category;
+  }
+};
+
+// プログラムを大カテゴリーごとにグループ化する関数を追加
+const groupProgramsByMainCategory = (programs) => {
+  const groupedPrograms = {
+    "農業・林業分野": [],
+    商工分野: [],
+    "建設・水道分野": [],
+    住宅分野: [],
+    保健福祉分野: [],
+    教育分野: [],
+  };
+
+  programs.forEach((program) => {
+    const category = getCategoryLabel(program.category, program.subcategory);
+    if (groupedPrograms[category]) {
+      groupedPrograms[category].push(program);
+    }
+  });
+
+  return groupedPrograms;
+};
+
+// カテゴリーに応じた背景色とテキスト色を取得する関数
+const getCategoryStyle = (category) => {
+  switch (category) {
+    case "農業・林業分野":
+      return "bg-green-100 text-green-800";
+    case "商工分野":
+      return "bg-blue-100 text-blue-800";
+    case "建設・水道分野":
+      return "bg-gray-100 text-gray-800";
+    case "住宅分野":
+      return "bg-yellow-100 text-yellow-800";
+    case "保健福祉分野":
+      return "bg-pink-100 text-pink-800";
+    case "教育分野":
+      return "bg-purple-100 text-purple-800";
+    default:
+      return "bg-gray-100 text-gray-600";
+  }
+};
 
 const LifeTimelineResults = ({ results, onReset }) => {
   // グラフのコンテナ幅を管理するstate
@@ -42,6 +111,14 @@ const LifeTimelineResults = ({ results, onReset }) => {
     }).format(amount);
   };
 
+  // 支援制度カードクリック時の処理を追加
+  const handleProgramClick = (program) => {
+    const supportInfo = getSupportPath(program.name);
+    if (supportInfo) {
+      window.open(`${supportInfo.path}#support-${supportInfo.id}`, "_blank");
+    }
+  };
+
   // ライフステージデータを生成
   const generateLifeStageData = () => {
     const timeline = [];
@@ -71,6 +148,8 @@ const LifeTimelineResults = ({ results, onReset }) => {
   };
 
   const timelineData = generateLifeStageData();
+
+  const groupedPrograms = groupProgramsByMainCategory(results.programs);
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-lg border shadow-sm">
@@ -165,26 +244,18 @@ const LifeTimelineResults = ({ results, onReset }) => {
         <div className="mb-8">
           <h3 className="text-lg font-semibold mb-4">対象となる支援制度</h3>
 
-          {["industry", "housing", "living"].map((category) => {
-            const categoryPrograms = results.programs.filter(
-              (p) => p.category === category
-            );
-            if (categoryPrograms.length === 0) return null;
+          {Object.entries(groupedPrograms).map(([category, programs]) => {
+            if (programs.length === 0) return null;
 
             return (
               <div key={category} className="mb-6">
-                <h4 className="text-md font-semibold mb-3 px-4">
-                  {category === "industry"
-                    ? "産業支援"
-                    : category === "housing"
-                    ? "住宅支援"
-                    : "暮らし支援"}
-                </h4>
+                <h4 className="text-md font-semibold mb-3 px-4">{category}</h4>
                 <div className="space-y-3">
-                  {categoryPrograms.map((program) => (
+                  {programs.map((program) => (
                     <div
                       key={program.id}
-                      className="bg-white border rounded-lg p-4 hover:bg-gray-50 transition-colors"
+                      onClick={() => handleProgramClick(program)}
+                      className="bg-white border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer group relative"
                     >
                       <div className="flex justify-between items-start">
                         <div>
@@ -219,32 +290,13 @@ const LifeTimelineResults = ({ results, onReset }) => {
                           )}
                         </div>
                       </div>
-
                       <div className="mt-3 flex gap-2">
                         <span
-                          className={`inline-block px-2 py-1 text-xs rounded-full ${
-                            program.category === "industry"
-                              ? "bg-green-100 text-green-800"
-                              : program.category === "housing"
-                              ? "bg-blue-100 text-blue-800"
-                              : "bg-purple-100 text-purple-800"
-                          }`}
+                          className={`inline-block px-2 py-1 text-xs rounded-full ${getCategoryStyle(
+                            category
+                          )}`}
                         >
-                          {program.subcategory === "agriculture"
-                            ? "農業"
-                            : program.subcategory === "business"
-                            ? "商工業"
-                            : program.subcategory === "construction"
-                            ? "建設"
-                            : program.subcategory === "rent"
-                            ? "賃貸"
-                            : program.subcategory === "moving"
-                            ? "転入"
-                            : program.subcategory === "education"
-                            ? "教育"
-                            : program.subcategory === "childcare"
-                            ? "子育て"
-                            : program.subcategory}
+                          {category}
                         </span>
                       </div>
                     </div>

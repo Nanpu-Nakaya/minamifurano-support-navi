@@ -7,7 +7,7 @@ export const calculateSupportPrograms = (answers) => {
   if (answers.living_plan === "new_house") {
     applicablePrograms.push({
       id: "new_house_support",
-      name: "住宅建設支援",
+      name: "住宅建設等促進及び危険廃屋解体撤去促進事業",
       amount: 3000000,
       description:
         "新築住宅建設に対する補助金（町内業者利用で最大300万円、うち100万円は商品券）",
@@ -21,7 +21,7 @@ export const calculateSupportPrograms = (answers) => {
   if (answers.living_plan === "rent") {
     applicablePrograms.push({
       id: "rent_support",
-      name: "民間賃貸住宅家賃助成",
+      name: "民間賃貸住宅家賃助成事業",
       amount: 1500000,
       description: "賃貸住宅の家賃補助（最長5年間）",
       category: "housing",
@@ -35,7 +35,7 @@ export const calculateSupportPrograms = (answers) => {
   if (answers.basic_info !== "none") {
     applicablePrograms.push({
       id: "moving_support",
-      name: "転居費用助成",
+      name: "転居費用助成事業",
       amount: 160000,
       description: "引っ越し費用の補助（道外からの場合最大額）",
       category: "living",
@@ -50,7 +50,7 @@ export const calculateSupportPrograms = (answers) => {
     case "agriculture_new":
       applicablePrograms.push({
         id: "new_farmer_support",
-        name: "新規就農支援",
+        name: "新規就農者等育成事業",
         amount: 2400000,
         description: "新規就農者への就農奨励金（年額120万円、2年間）",
         category: "industry",
@@ -63,7 +63,7 @@ export const calculateSupportPrograms = (answers) => {
     case "agriculture_successor":
       applicablePrograms.push({
         id: "agriculture_successor_support",
-        name: "農業後継者育成支援",
+        name: "農業後継者育成奨学金支給事業",
         amount: 2400000,
         description: "農業後継者への奨学金（月額5万円、最長4年間）",
         category: "industry",
@@ -76,7 +76,7 @@ export const calculateSupportPrograms = (answers) => {
     case "business":
       applicablePrograms.push({
         id: "business_support",
-        name: "起業支援",
+        name: "商工業等起業支援事業",
         amount: 2000000,
         description: "新規創業・事業拡大への支援金",
         category: "industry",
@@ -89,7 +89,7 @@ export const calculateSupportPrograms = (answers) => {
     case "business_product":
       applicablePrograms.push({
         id: "product_development_support",
-        name: "特産品開発支援",
+        name: "特産品開発支援事業",
         amount: 1000000,
         description: "地域資源を活用した特産品開発への支援金",
         category: "industry",
@@ -152,7 +152,7 @@ export const calculateSupportPrograms = (answers) => {
 
     applicablePrograms.push({
       id: "flu_vaccine_support",
-      name: "インフルエンザワクチン接種費用助成",
+      name: "インフルエンザワクチン接種費用負担軽減事業",
       amount: 0,
       description: "18歳以下の子どものインフルエンザワクチン接種費用を助成",
       category: "living",
@@ -207,7 +207,7 @@ export const calculateSupportPrograms = (answers) => {
 
       applicablePrograms.push({
         id: "childbirth_support",
-        name: "出産・子育て応援支援金",
+        name: "出産・子育て応援事業",
         amount: 200000,
         description: "妊娠・出産時の支援金",
         category: "living",
@@ -256,7 +256,7 @@ export const calculateSupportPrograms = (answers) => {
   ) {
     applicablePrograms.push({
       id: "scholarship_support",
-      name: "奨学金返還支援",
+      name: "奨学金返還支援事業",
       amount: 2400000,
       description: "奨学金返還の補助（月額2万円、最長10年間）",
       category: "living",
@@ -274,7 +274,7 @@ export const calculateSupportPrograms = (answers) => {
     // 給食費助成
     applicablePrograms.push({
       id: "school_lunch_support",
-      name: "保育所・小中学校給食費助成",
+      name: "保育所・小中学校給食費助成事業",
       amount: 0,
       description: "保育所（3歳以上）と小中学校の給食費を全額助成",
       category: "living",
@@ -288,7 +288,7 @@ export const calculateSupportPrograms = (answers) => {
     // アスリート派遣補助
     applicablePrograms.push({
       id: "athlete_support",
-      name: "アスリート派遣補助",
+      name: "アスリート派遣補助金交付事業",
       amount: 0,
       description: "全道・全国・国際大会等に出場する際の経費を補助",
       category: "living",
@@ -302,7 +302,7 @@ export const calculateSupportPrograms = (answers) => {
     // 遠距離通学費助成
     applicablePrograms.push({
       id: "school_transport_support",
-      name: "児童生徒遠距離通学費助成",
+      name: "児童生徒遠距離通学費助成事業",
       amount: 0,
       description: "自宅から学校まで3km以上の遠距離通学者への通学費用助成",
       category: "living",
@@ -316,7 +316,7 @@ export const calculateSupportPrograms = (answers) => {
     // 町立高校通学費助成を追加
     applicablePrograms.push({
       id: "high_school_transport_support",
-      name: "町立高等学校通学費助成",
+      name: "町立高等学校生徒通学費助成金交付事業",
       amount: 0,
       description:
         "町立高校への通学に使用する公共交通機関の定期券購入費を全額助成",
@@ -331,7 +331,7 @@ export const calculateSupportPrograms = (answers) => {
     // 高校総合支援対策を追加
     applicablePrograms.push({
       id: "high_school_comprehensive_support",
-      name: "町立高等学校総合支援対策",
+      name: "高等学校総合支援対策事業",
       amount: 0,
       description:
         "町立高校生への総合的な支援（教科書、制服、検定料、給食費など）",
@@ -354,7 +354,7 @@ export const calculateSupportPrograms = (answers) => {
     // 高校部活動大会参加費助成を追加
     applicablePrograms.push({
       id: "high_school_club_activity_support",
-      name: "町立高校部活動大会参加費助成",
+      name: "部活動大会参加費助成事業",
       amount: 0,
       description: "全道大会・全国大会への参加費用を助成",
       category: "living",
@@ -368,7 +368,7 @@ export const calculateSupportPrograms = (answers) => {
     // ICT学習環境整備支援を追加
     applicablePrograms.push({
       id: "high_school_ict_support",
-      name: "町立高校ICT学習環境整備支援",
+      name: "ICT学習環境整備事業",
       amount: 0,
       description: "生徒1人1台のiPadと学習アプリ等を無償提供",
       category: "living",
@@ -382,7 +382,7 @@ export const calculateSupportPrograms = (answers) => {
     // 国際交流派遣事業を追加
     applicablePrograms.push({
       id: "high_school_international_exchange",
-      name: "町立高校国際交流派遣事業",
+      name: "国際交流派遣事業",
       amount: 580000,
       description: "海外への国際交流派遣プログラム（約10日間）の費用を助成",
       category: "living",
