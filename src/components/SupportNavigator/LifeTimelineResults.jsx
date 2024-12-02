@@ -7,7 +7,7 @@ import {
   Area,
   AreaChart,
 } from "recharts";
-import { ChevronLeft, Info, ExternalLink } from "lucide-react";
+import { ChevronLeft, Info } from "lucide-react";
 import { getSupportPath } from "../../utils/supportMapping";
 
 // 大カテゴリーの日本語変換関数
