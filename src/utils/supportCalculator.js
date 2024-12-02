@@ -259,7 +259,7 @@ export const calculateSupportPrograms = (answers) => {
       name: "奨学金返還支援事業",
       amount: 2400000,
       description: "奨学金返還の補助（月額2万円、最長10年間）",
-      category: "living",
+      category: "industry",
       subcategory: "education",
       duration: "10年間",
       timing: 0,
