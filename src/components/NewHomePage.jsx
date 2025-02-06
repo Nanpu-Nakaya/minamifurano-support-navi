@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
   Building2,
-  ChevronDown,
+  // ChevronDown,
   ChevronRight,
   GraduationCap,
   Heart,
@@ -109,8 +109,8 @@ const NewHomePage = () => {
         </div>
 
         {/* スクロールインジケーター */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+        {/* <motion.div
+          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50" // z-20 を追加
           animate={{ y: [0, 10, 0] }}
           transition={{
             repeat: Infinity,
@@ -119,7 +119,7 @@ const NewHomePage = () => {
           }}
         >
           <ChevronDown className="text-white w-10 h-10" />
-        </motion.div>
+        </motion.div> */}
       </section>
 
       {/* ----------------------- 支援制度セクション ----------------------------- */}
