@@ -166,6 +166,9 @@ const LifeTimelineResults = ({ results, onReset }) => {
               {formatMoney(results.totalAmount)}
             </p>
             <p className="text-sm text-gray-600">生涯支援総額（概算）</p>
+            <p className="text-sm text-gray-600">
+              ※条件により支援額が変動する場合があります
+            </p>
           </div>
         </div>
 

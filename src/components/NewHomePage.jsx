@@ -13,7 +13,6 @@ import {
   Store,
   Sun,
   TreePine,
-  User,
   Users,
 } from "lucide-react"; // ChevronDownを追加
 import { Card, CardContent } from "./ui/card";
@@ -295,7 +294,7 @@ const NewHomePage = () => {
       </section>
 
       {/* ------------------------- 移住者の声セクション ------------------------- */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-12 text-primary-dark">
             移住者の声
@@ -340,7 +339,7 @@ const NewHomePage = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ---------------------- CTA セクション ------------------------------ */}
       {/* CTAセクション */}

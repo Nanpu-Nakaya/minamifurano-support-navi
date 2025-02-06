@@ -10,7 +10,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* ロゴ部分 */}
-          <div className="flex-shrink-0">
+          {/* <div className="flex-shrink-0">
             <Link to="/">
               <img
                 src="/logomina01.png"
@@ -18,7 +18,7 @@ const Header = () => {
                 className="h-12 w-auto"
               />
             </Link>
-          </div>
+          </div> */}
 
           {/* PC用メニュー */}
           <nav className="hidden md:block">
