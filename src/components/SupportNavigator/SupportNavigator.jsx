@@ -49,7 +49,7 @@ const SupportNavigator = () => {
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-lg border shadow-sm">
       <div className="flex flex-col space-y-1.5 p-6 text-center">
-        <h2 className="text-2xl font-bold">南富良野町 支援制度ナビ</h2>
+        <h2 className="text-2xl font-bold">南富良野町 支援ナビ</h2>
         <p className="text-gray-600">あなたに合った支援制度をご案内します</p>
       </div>
       <div className="p-6 pt-0">
