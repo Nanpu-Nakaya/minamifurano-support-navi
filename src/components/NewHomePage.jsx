@@ -103,7 +103,7 @@ const NewHomePage = () => {
               rel="noopener noreferrer"
               className="inline-block bg-accent-light/70 hover:bg-primary-light/70 text-secondary-light hover:text-primary-dark font-bold py-4 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
             >
-              支援制度を確認する
+              支援ナビを確認する
             </Link>
           </motion.div>
         </div>

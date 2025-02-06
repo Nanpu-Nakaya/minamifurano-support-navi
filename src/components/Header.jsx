@@ -25,7 +25,7 @@ const Header = () => {
             <ul className="flex space-x-8">
               {[
                 { href: "/", label: "ホーム" },
-                { href: "/support", label: "支援制度" },
+                { href: "/support", label: "支援ナビ" },
                 { href: "/support-list", label: "支援制度一覧" },
                 { href: "/contact", label: "お問い合わせ" },
               ].map((link) => (
@@ -74,7 +74,7 @@ const Header = () => {
           <ul className="space-y-2">
             {[
               { href: "/", label: "ホーム" },
-              { href: "/support", label: "支援制度" },
+              { href: "/support", label: "支援ナビ" },
               { href: "/support-list", label: "支援制度一覧" }, // ここを変更
               { href: "/contact", label: "お問い合わせ" },
             ].map((link) => (
