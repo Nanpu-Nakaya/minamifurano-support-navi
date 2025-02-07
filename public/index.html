@@ -1,20 +1,117 @@
 <!DOCTYPE html>
 <html lang="ja">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-NB3C4PTXY0"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-NB3C4PTXY0");
+    </script>
+
+    <!-- 基本設定 -->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- モバイル最適化：shrink-to-fitを追加 -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- ページ説明 -->
+    <meta
+      name="description"
+      content="南富良野町の支援金情報を提供する『支援金ナビ』。最新の地域支援金、助成金、補助金情報をわかりやすくご案内します。"
+    />
+    <!-- クローラー指示 -->
+    <meta name="robots" content="index,follow" />
+    <!-- ブラウザのテーマカラー -->
     <meta name="theme-color" content="#3B82F6" />
-    <meta name="description" content="南富良野町 支援金ナビ" />
+    <!-- 作者情報 -->
+    <meta name="author" content="南富良野町" />
+    <!-- Googleサイト認証（必要に応じて） -->
+    <meta
+      name="google-site-verification"
+      content="your_verification_token_here"
+    />
+    <!-- 電話番号自動リンク無効化 -->
+    <meta name="format-detection" content="telephone=no" />
+    <!-- リファラー制御 -->
+    <meta name="referrer" content="no-referrer-when-downgrade" />
 
-    <!-- ファビコン設定 -->
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="南富良野町 支援金ナビ" />
+    <meta
+      property="og:description"
+      content="南富良野町の支援金情報を提供する『支援金ナビ』。最新の地域支援金、助成金、補助金情報をわかりやすくご案内します。"
+    />
+    <meta property="og:type" content="website" />
+    <!-- サイトの正規URL -->
+    <meta property="og:url" content="https://example.com/" />
+    <!-- SNSシェア時に表示する画像 -->
+    <meta
+      property="og:image"
+      content="https://example.com/path/to/og-image.jpg"
+    />
+    <!-- サイト名・ロケール情報 -->
+    <meta property="og:site_name" content="南富良野町 支援金ナビ" />
+    <meta property="og:locale" content="ja_JP" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="南富良野町 支援金ナビ" />
+    <meta
+      name="twitter:description"
+      content="南富良野町の支援金情報を提供する『支援金ナビ』。最新の地域支援金、助成金、補助金情報をわかりやすくご案内します。"
+    />
+    <meta
+      name="twitter:image"
+      content="https://example.com/path/to/twitter-image.jpg"
+    />
+    <meta name="twitter:site" content="@your_twitter_handle" />
+    <meta name="twitter:creator" content="@your_twitter_handle" />
+
+    <!-- Canonical URL（重複コンテンツ対策） -->
+    <link rel="canonical" href="https://example.com/" />
+    <!-- hreflang：多言語対応時の基準言語指定（今回は日本語） -->
+    <link rel="alternate" hreflang="ja" href="https://example.com/" />
+
+    <!-- ファビコン・Web Manifest -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- PNG fallback（SVGをサポートしていないブラウザ用） -->
     <link rel="alternate icon" type="image/png" href="/favicon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <!-- Microsoft向け設定 -->
+    <meta name="msapplication-TileColor" content="#3B82F6" />
+    <meta name="msapplication-config" content="/browserconfig.xml" />
 
-    <title>南富良野町 支援金ナビ</title>
+    <!-- ページタイトル -->
+    <title>南富良野町 支援ナビ</title>
+
+    <!-- 構造化データ：WebSite（サイト全体の情報＋検索アクション） -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "南富良野町 支援ナビ",
+        "url": "https://example.com/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://example.com/?s={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      このアプリを利用するには、JavaScriptを有効にしてください。
+    </noscript>
     <div id="root"></div>
   </body>
 </html>
