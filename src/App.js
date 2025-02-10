@@ -1,6 +1,5 @@
 // App.js
-
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import NewHomePage from "./components/NewHomePage";
@@ -17,6 +16,15 @@ import EducationDetail from "./components/SupportDetail/EducationDetail";
 import "./App.css";
 
 function App() {
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "virtualPageView",
+      pagePath: location.pathname + location.search,
+      pageTitle: document.title, // or get title from somewhere
+    });
+  }, [location]);
+
   return (
     <Router>
       <div className="min-h-screen">
