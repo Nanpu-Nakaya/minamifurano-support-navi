@@ -20,10 +20,10 @@ import {
 import { Card, CardContent } from "./ui/card";
 
 const seasonImages = {
-  spring: "/images/kanayama_sp.JPG",
-  summer: "/images/kosui_su.JPG",
-  autumn: "/images/kanayama_au.JPG",
-  winter: "/images/ski_wi.png",
+  spring: "/images/kanayama_sp.jpg",
+  summer: "/images/kosui_su.jpg",
+  autumn: "/images/kanayama_au.jpg",
+  winter: "/images/ski_wi.jpg",
 };
 
 const NewHomePage = () => {
