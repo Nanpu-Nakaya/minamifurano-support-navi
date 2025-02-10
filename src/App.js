@@ -1,11 +1,7 @@
 // App.js
-import React, { useEffect } from "react"; // useEffect をインポート
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useLocation, // useLocation をインポート
-} from "react-router-dom";
+
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import NewHomePage from "./components/NewHomePage";
 import Contact from "./components/Contact/Contact";
@@ -21,17 +17,6 @@ import EducationDetail from "./components/SupportDetail/EducationDetail";
 import "./App.css";
 
 function App() {
-  let location = useLocation(); // useLocationフックを使用
-
-  useEffect(() => {
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: "virtualPageView",
-      pagePath: location.pathname + location.search,
-      pageTitle: document.title,
-    });
-  }, [location]); // locationが変わるたびに実行
-
   return (
     <Router>
       <div className="min-h-screen">
