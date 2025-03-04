@@ -25,9 +25,10 @@ const getCategoryLabel = (category, subcategory) => {
       } else if (
         subcategory === "welfare" ||
         subcategory === "childcare" ||
-        subcategory === "medical"
+        subcategory === "medical" ||
+        subcategory === "moving" // 移動関連も適切なカテゴリーに分類
       ) {
-        return "保健福祉分野";
+        return "保健福祉分野"; // または別のカテゴリーに割り当て
       } else if (subcategory === "education") {
         return "教育分野";
       }
@@ -46,12 +47,16 @@ const groupProgramsByMainCategory = (programs) => {
     住宅分野: [],
     保健福祉分野: [],
     教育分野: [],
+    その他: [], // 分類されないものを捕捉するカテゴリー
   };
 
   programs.forEach((program) => {
     const category = getCategoryLabel(program.category, program.subcategory);
     if (groupedPrograms[category]) {
       groupedPrograms[category].push(program);
+    } else {
+      // カテゴリーに当てはまらない場合は「その他」に追加
+      groupedPrograms["その他"].push(program);
     }
   });
 
@@ -119,27 +124,82 @@ const LifeTimelineResults = ({ results, onReset }) => {
     }
   };
 
-  // ライフステージデータを生成
+  // ライフステージデータを生成（グラフ部分）
+  // "年間"や"ヶ月"といった表記ゆれにもある程度対応し、
+  // たとえば「5年」「5年間」「5 年」「５年間（全角）」などをまとめて処理します。
   const generateLifeStageData = () => {
     const timeline = [];
-    let cumulativeAmount = 0;
+    // ユーザー年齢が未設定の場合はデフォルトで30歳とする
     const baseAge = results.userProfile?.user_age
-      ? parseInt(results.userProfile.user_age)
+      ? parseInt(results.userProfile.user_age, 10)
       : 30;
 
-    const sortedPrograms = [...results.programs].sort((a, b) => {
-      const timeA = a.timing || 0;
-      const timeB = b.timing || 0;
-      return timeA - timeB;
+    // 年齢ごとの支援金額を計算するためのマップ
+    const yearlyAmounts = {};
+
+    // まず各プログラムを処理し、年齢ごとの支援金額を計算
+    results.programs.forEach((program) => {
+      // program.timing（開始年齢のオフセット）があれば加算して開始年齢を算出
+      const startAge = baseAge + (program.timing || 0);
+
+      if (program.duration) {
+        // 全角数字を含む可能性がある場合は半角に変換
+        // （例：５年間 → 5年間 に置き換え）
+        const normalizedDuration = program.duration.replace(/[０-９]/g, (s) =>
+          String.fromCharCode(s.charCodeAt(0) - 65248)
+        );
+
+        // 「○年」「○年間」「○ 年」などにも対応できるように
+        const yearMatch = normalizedDuration.match(/(\d+)\s*年/);
+        // 「○ヶ月」「○ ヶ月」「○か月」などにも対応
+        const monthMatch = normalizedDuration.match(/(\d+)\s*ヶ?月/);
+
+        if (yearMatch) {
+          // 「○年」にマッチした場合
+          const years = parseInt(yearMatch[1], 10);
+
+          // 複数年にわたる支援なら、各年の支給を均等割りする
+          const yearlyAmount = program.amount / years;
+
+          for (let i = 0; i < years; i++) {
+            const age = startAge + i;
+            yearlyAmounts[age] = (yearlyAmounts[age] || 0) + yearlyAmount;
+          }
+        } else if (monthMatch) {
+          // 「○ヶ月」にマッチした場合
+          const months = parseInt(monthMatch[1], 10);
+
+          // 複数月にわたる支援を1年単位に換算（端数は切り上げ）
+          const years = Math.ceil(months / 12);
+          const yearlyAmount = program.amount / years;
+
+          for (let i = 0; i < years; i++) {
+            const age = startAge + i;
+            yearlyAmounts[age] = (yearlyAmounts[age] || 0) + yearlyAmount;
+          }
+        } else {
+          // "年間"や"ヶ月"に当てはまらない場合は一括支給扱いとする
+          yearlyAmounts[startAge] =
+            (yearlyAmounts[startAge] || 0) + program.amount;
+        }
+      } else {
+        // duration（支給期間）が明記されていない場合は一括支給扱い
+        yearlyAmounts[startAge] =
+          (yearlyAmounts[startAge] || 0) + program.amount;
+      }
     });
 
-    sortedPrograms.forEach((program) => {
-      cumulativeAmount += program.amount;
+    // 年齢順にソートしてから累積金額を計算
+    const ages = Object.keys(yearlyAmounts)
+      .map(Number)
+      .sort((a, b) => a - b);
+
+    let cumulativeAmount = 0;
+    ages.forEach((age) => {
+      cumulativeAmount += yearlyAmounts[age];
       timeline.push({
-        age: baseAge + (program.timing || 0),
-        stage: program.name,
-        amount: program.amount,
-        programs: [program.name],
+        age: age,
+        amount: yearlyAmounts[age],
         cumulative: cumulativeAmount,
       });
     });
@@ -231,7 +291,7 @@ const LifeTimelineResults = ({ results, onReset }) => {
                   }}
                 />
                 <Area
-                  type="stepAfter"
+                  type="monotone"
                   dataKey="cumulative"
                   stroke="#3B82F6"
                   strokeWidth={2}
