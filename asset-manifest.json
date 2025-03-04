@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/minamifurano-support-navi/static/css/main.f04c6569.css",
+    "main.js": "/minamifurano-support-navi/static/js/main.3e13a0dc.js",
+    "static/js/453.64f7ce1f.chunk.js": "/minamifurano-support-navi/static/js/453.64f7ce1f.chunk.js",
+    "index.html": "/minamifurano-support-navi/index.html",
+    "main.f04c6569.css.map": "/minamifurano-support-navi/static/css/main.f04c6569.css.map",
+    "main.3e13a0dc.js.map": "/minamifurano-support-navi/static/js/main.3e13a0dc.js.map",
+    "453.64f7ce1f.chunk.js.map": "/minamifurano-support-navi/static/js/453.64f7ce1f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f04c6569.css",
+    "static/js/main.3e13a0dc.js"
+  ]
+}
