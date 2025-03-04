@@ -107,10 +107,6 @@ function App() {
             path="/experiences"
             element={<div className="pt-20">移住体験談ページ（準備中）</div>}
           />
-          <Route
-            path="/contact"
-            element={<div className="pt-20">お問い合わせページ（準備中）</div>}
-          />
         </Routes>
       </div>
     </Router>

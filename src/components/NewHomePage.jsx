@@ -101,8 +101,6 @@ const NewHomePage = () => {
           >
             <Link
               to="/support"
-              target="_blank"
-              rel="noopener noreferrer"
               className="inline-block bg-accent-light/70 hover:bg-primary-light/70 text-secondary-light hover:text-primary-dark font-bold py-4 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
             >
               支援ナビを確認する
@@ -225,8 +223,6 @@ const NewHomePage = () => {
       <div className="text-center mt-12">
         <Link
           to="/support-list"
-          target="_blank"
-          rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 bg-accent-light/70 hover:bg-primary-light/70 text-secondary-light hover:text-primary-dark font-bold py-4 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
         >
           <span>支援制度一覧を見る</span>

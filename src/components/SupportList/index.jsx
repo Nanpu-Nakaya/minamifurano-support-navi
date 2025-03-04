@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   TreePine,
   Store,
@@ -14,6 +15,7 @@ const SupportList = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  
   const categories = [
     {
       id: "housing",
@@ -32,7 +34,7 @@ const SupportList = () => {
     {
       id: "agriculture",
       title: "農業・林業分野",
-      path: "/agriculture-support", // パスを追加
+      path: "/agriculture-support",
       icon: TreePine,
       iconColor: "text-green-600",
       bgColor: "bg-green-50",
@@ -49,7 +51,7 @@ const SupportList = () => {
     {
       id: "commerce",
       title: "商工分野",
-      path: "/commerce-support", // パスを追加
+      path: "/commerce-support",
       icon: Store,
       iconColor: "text-blue-600",
       bgColor: "bg-blue-50",
@@ -141,30 +143,22 @@ const SupportList = () => {
                     <Card
                       key={item.id}
                       className="hover:shadow-md transition-shadow duration-200 cursor-pointer"
-                      onClick={() =>
-                        window.open(
-                          `${category.path}#support-${item.id}`,
-                          "_blank"
-                        )
-                      }
                     >
-                      <CardContent className="p-4">
-                        <div className="flex justify-between items-center">
-                          <span>{item.title}</span>
-                          <button
-                            className="text-blue-600 hover:text-blue-800"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              window.open(
-                                `${category.path}#support-${item.id}`,
-                                "_blank"
-                              );
-                            }}
-                          >
-                            詳細を見る
-                          </button>
-                        </div>
-                      </CardContent>
+                      <Link to={`${category.path}#support-${item.id}`}>
+                        <CardContent className="p-4">
+                          <div className="flex justify-between items-center">
+                            <span>{item.title}</span>
+                            <button
+                              className="text-blue-600 hover:text-blue-800"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                              }}
+                            >
+                              詳細を見る
+                            </button>
+                          </div>
+                        </CardContent>
+                      </Link>
                     </Card>
                   ))}
                 </div>

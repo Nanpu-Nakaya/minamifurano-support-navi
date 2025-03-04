@@ -25,9 +25,10 @@ const getCategoryLabel = (category, subcategory) => {
       } else if (
         subcategory === "welfare" ||
         subcategory === "childcare" ||
-        subcategory === "medical"
+        subcategory === "medical" ||
+        subcategory === "moving" // 移動関連も適切なカテゴリーに分類
       ) {
-        return "保健福祉分野";
+        return "保健福祉分野"; // または別のカテゴリーに割り当て
       } else if (subcategory === "education") {
         return "教育分野";
       }
@@ -41,17 +42,21 @@ const getCategoryLabel = (category, subcategory) => {
 const groupProgramsByMainCategory = (programs) => {
   const groupedPrograms = {
     "農業・林業分野": [],
-    商工分野: [],
+    "商工分野": [],
     "建設・水道分野": [],
-    住宅分野: [],
-    保健福祉分野: [],
-    教育分野: [],
+    "住宅分野": [],
+    "保健福祉分野": [],
+    "教育分野": [],
+    "その他": [], // 分類されないものを捕捉するカテゴリー
   };
 
   programs.forEach((program) => {
     const category = getCategoryLabel(program.category, program.subcategory);
     if (groupedPrograms[category]) {
       groupedPrograms[category].push(program);
+    } else {
+      // カテゴリーに当てはまらない場合は「その他」に追加
+      groupedPrograms["その他"].push(program);
     }
   });
 
@@ -122,28 +127,70 @@ const LifeTimelineResults = ({ results, onReset }) => {
   // ライフステージデータを生成
   const generateLifeStageData = () => {
     const timeline = [];
-    let cumulativeAmount = 0;
     const baseAge = results.userProfile?.user_age
       ? parseInt(results.userProfile.user_age)
       : 30;
-
-    const sortedPrograms = [...results.programs].sort((a, b) => {
-      const timeA = a.timing || 0;
-      const timeB = b.timing || 0;
-      return timeA - timeB;
+    
+    // 年齢ごとの支援金額を計算するためのマップを作成
+    const yearlyAmounts = {};
+    
+    // まず各プログラムを処理し、年齢ごとの支援金額を計算
+    results.programs.forEach((program) => {
+      const startAge = baseAge + (program.timing || 0);
+      
+      if (program.duration && program.duration.includes("年間")) {
+        // 複数年に渡る支援の場合
+        const durationMatch = program.duration.match(/(\d+)年間/);
+        if (durationMatch) {
+          const years = parseInt(durationMatch[1]);
+          const yearlyAmount = program.amount / years;
+          
+          // 各年の支援金額を記録
+          for (let i = 0; i < years; i++) {
+            const age = startAge + i;
+            yearlyAmounts[age] = (yearlyAmounts[age] || 0) + yearlyAmount;
+          }
+        } else {
+          // 期間の解析に失敗した場合はデフォルト動作
+          yearlyAmounts[startAge] = (yearlyAmounts[startAge] || 0) + program.amount;
+        }
+      } else if (program.duration && program.duration.includes("ヶ月")) {
+        // 月単位の支援の場合（例: 60ヶ月）
+        const durationMatch = program.duration.match(/(\d+)ヶ月/);
+        if (durationMatch) {
+          const months = parseInt(durationMatch[1]);
+          const years = Math.ceil(months / 12);
+          const yearlyAmount = program.amount / years;
+          
+          // 各年の支援金額を記録
+          for (let i = 0; i < years; i++) {
+            const age = startAge + i;
+            yearlyAmounts[age] = (yearlyAmounts[age] || 0) + yearlyAmount;
+          }
+        } else {
+          // 期間の解析に失敗した場合はデフォルト動作
+          yearlyAmounts[startAge] = (yearlyAmounts[startAge] || 0) + program.amount;
+        }
+      } else {
+        // 一括支給の場合
+        yearlyAmounts[startAge] = (yearlyAmounts[startAge] || 0) + program.amount;
+      }
     });
-
-    sortedPrograms.forEach((program) => {
-      cumulativeAmount += program.amount;
+    
+    // 年齢順にソート
+    const ages = Object.keys(yearlyAmounts).map(Number).sort((a, b) => a - b);
+    
+    // 累積金額を計算しながらタイムラインを構築
+    let cumulativeAmount = 0;
+    ages.forEach(age => {
+      cumulativeAmount += yearlyAmounts[age];
       timeline.push({
-        age: baseAge + (program.timing || 0),
-        stage: program.name,
-        amount: program.amount,
-        programs: [program.name],
-        cumulative: cumulativeAmount,
+        age: age,
+        amount: yearlyAmounts[age],
+        cumulative: cumulativeAmount
       });
     });
-
+    
     return timeline;
   };
 
@@ -231,7 +278,7 @@ const LifeTimelineResults = ({ results, onReset }) => {
                   }}
                 />
                 <Area
-                  type="stepAfter"
+                  type="monotone"
                   dataKey="cumulative"
                   stroke="#3B82F6"
                   strokeWidth={2}

@@ -10,7 +10,7 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* ロゴ部分 */}
-          {/* <div className="flex-shrink-0">
+          <div className="flex-shrink-0">
             <Link to="/">
               <img
                 src="/logomina01.png"
@@ -18,7 +18,7 @@ const Header = () => {
                 className="h-12 w-auto"
               />
             </Link>
-          </div> */}
+          </div>
 
           {/* PC用メニュー */}
           <nav className="hidden md:block">
@@ -32,12 +32,6 @@ const Header = () => {
                 <li key={link.href} className="relative group">
                   <Link
                     to={link.href}
-                    target={link.href === "/support" ? "_blank" : undefined}
-                    rel={
-                      link.href === "/support"
-                        ? "noopener noreferrer"
-                        : undefined
-                    }
                     className="text-secondary-light hover:text-primary-light transition-colors duration-300"
                   >
                     {link.label}
@@ -75,22 +69,12 @@ const Header = () => {
             {[
               { href: "/", label: "ホーム" },
               { href: "/support", label: "支援ナビ" },
-              { href: "/support-list", label: "支援制度一覧" }, // ここを変更
+              { href: "/support-list", label: "支援制度一覧" },
               { href: "/contact", label: "お問い合わせ" },
             ].map((link) => (
               <li key={link.href}>
                 <Link
                   to={link.href}
-                  target={
-                    ["/support", "/support-list"].includes(link.href)
-                      ? "_blank"
-                      : undefined
-                  }
-                  rel={
-                    ["/support", "/support-list"].includes(link.href)
-                      ? "noopener noreferrer"
-                      : undefined
-                  }
                   className="block py-2 text-secondary-light hover:text-primary-light transition-colors duration-300"
                   onClick={() => setIsMenuOpen(false)}
                 >
