@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- 背景円 -->
+  <circle cx="16" cy="16" r="16" fill="#3B82F6"/>
+  
+  <!-- 手のシルエット -->
+  <path d="M8 20 C8 24 11 26 16 26 C21 26 24 24 24 20 C24 18 23 16 22 15 L18 18 L14 18 L10 15 C9 16 8 18 8 20" 
+        fill="#60A5FA" stroke="white" stroke-width="1.5"/>
+  
+  <!-- 指のディテール -->
+  <path d="M10 15 C10 12 11 10 12 9 C13 8 14 8 14 10 L14 16 M14 15 C14 12 15 10 16 9 C17 8 18 8 18 10 L18 16" 
+        fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+  
+  <!-- コイン -->
+  <circle cx="16" cy="13" r="6" fill="#FBBF24"/>
+  <circle cx="16" cy="13" r="5" fill="#F59E0B"/>
+  
+  <!-- ¥マーク -->
+  <text x="16" y="15" fill="white" font-size="8" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold">¥</text>
+</svg>
