@@ -117,11 +117,14 @@ const LifeTimelineResults = ({ results, onReset }) => {
     }).format(amount);
   };
 
-  // 支援制度カードクリック時の処理を追加
+  // 支援制度カードクリック時の処理を修正
   const handleProgramClick = (program) => {
     const supportInfo = getSupportPath(program.name);
     if (supportInfo) {
-      window.open(`${supportInfo.path}#support-${supportInfo.id}`, "_blank");
+      // 現在のWindowの位置を基準にしたURLを構築
+      const baseUrl = window.location.origin + window.location.pathname;
+      const fullPath = `${baseUrl}#${supportInfo.path}#support-${supportInfo.id}`;
+      window.open(fullPath, "_blank");
     }
   };
 

@@ -94,18 +94,28 @@ const SupportNavigator = () => {
           {currentQuestion.type === "number" ? (
             <div className="w-full max-w-xs mx-auto">
               <input
-                type="number"
-                min={currentQuestion.min}
-                max={currentQuestion.max}
+                type="text" // number から text に変更
                 placeholder={currentQuestion.placeholder}
                 className="w-full p-4 text-left border rounded-lg hover:bg-gray-50 transition-colors"
                 onChange={(e) => {
-                  const age = parseInt(e.target.value);
-                  if (
-                    age >= currentQuestion.min &&
-                    age <= currentQuestion.max
-                  ) {
-                    handleSelect(currentQuestion.id, age);
+                  // 全角数字を半角数字に変換
+                  const convertedValue = e.target.value.replace(
+                    /[０-９]/g,
+                    (s) => String.fromCharCode(s.charCodeAt(0) - 65248)
+                  );
+
+                  // 数値以外の文字を取り除く
+                  const cleanValue = convertedValue.replace(/[^0-9]/g, "");
+
+                  // 空文字でなければ数値に変換
+                  if (cleanValue) {
+                    const age = parseInt(cleanValue, 10);
+                    if (
+                      age >= currentQuestion.min &&
+                      age <= currentQuestion.max
+                    ) {
+                      handleSelect(currentQuestion.id, age);
+                    }
                   }
                 }}
               />
