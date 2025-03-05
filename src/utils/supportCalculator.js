@@ -39,7 +39,7 @@ export const calculateSupportPrograms = (answers) => {
       name: "転居費用助成事業",
       amount: 160000,
       description: "引っ越し費用の補助（道外からの場合最大額）",
-      category: "living",
+      category: "housing",
       subcategory: "moving",
       duration: "転入時",
       timing: 0, // 移住直後
