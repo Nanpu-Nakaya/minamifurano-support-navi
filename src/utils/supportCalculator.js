@@ -15,7 +15,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "housing",
       subcategory: "construction",
       duration: "建設時",
-      timing: 0,
+      timing: 1,
     });
   }
 
@@ -28,7 +28,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "housing",
       subcategory: "rent",
       duration: "5年間",
-      timing: 0, // 移住直後から
+      timing: 1, // 移住直後から
     });
   }
 
@@ -57,7 +57,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "agriculture",
         duration: "2年間",
-        timing: 0,
+        timing: 1,
       });
       break;
 
@@ -70,7 +70,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "agriculture",
         duration: "4年間",
-        timing: 0,
+        timing: 1,
       });
       break;
 
@@ -83,7 +83,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "business",
         duration: "創業時",
-        timing: 0,
+        timing: 1,
       });
       break;
 
@@ -96,7 +96,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "business",
         duration: "開発時",
-        timing: 0,
+        timing: 1,
       });
       break;
 
@@ -119,7 +119,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "medical",
       duration: "22歳到達後の最初の3月31日まで",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※医療費の実費に応じて助成額が変動します",
     });
@@ -132,7 +132,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "childcare",
       duration: "3歳になるまで",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※保育料実費相当額が無償化されます",
     });
@@ -146,7 +146,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "medical",
       duration: "18歳到達後の最初の3月31日まで",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※通院・通園に要する交通費（バス料金相当）の2分の1を助成",
     });
@@ -159,7 +159,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "medical",
       duration: "18歳到達後の最初の3月31日まで",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※医療機関が定めた接種費用の実費を助成",
     });
@@ -174,7 +174,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "medical",
         duration: "初回受診時",
-        timing: 0,
+        timing: 1,
         isVariable: true,
         note: "※妊娠判定にかかる受診料を全額助成\n※交通費は基準額で助成",
       });
@@ -188,7 +188,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "medical",
         duration: "妊娠期～産後",
-        timing: 0,
+        timing: 1,
         isVariable: true,
         note: "※健診の交通費：産前14回・産後2回まで\n※出産準備：交通費1回・宿泊費5泊まで（1泊5,000円）",
       });
@@ -201,7 +201,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "childcare",
         duration: "産後6ヶ月まで",
-        timing: 0,
+        timing: 1,
         isVariable: true,
         note: "※富良野協会病院での日帰りまたは宿泊型ケア（最大7日間）\n※育児相談・授乳指導等のサービスを無料で利用可能",
       });
@@ -214,7 +214,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "childcare",
         duration: "出産時",
-        timing: 0,
+        timing: 1,
       });
 
       // おたふくかぜワクチン接種費用助成を追加
@@ -227,7 +227,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "medical",
         duration: "1歳～就学前",
-        timing: 0,
+        timing: 1,
         isVariable: true,
         note: "※指定医療機関での接種費用を全額助成",
       });
@@ -241,7 +241,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "medical",
         duration: "治療期間中",
-        timing: 0,
+        timing: 1,
         isVariable: true,
         note: "※保険適用外治療費の75%を助成（治療費）\n※通院交通費は距離に応じた基準額\n※夫婦ともに南富良野町に住民登録が必要",
       });
@@ -263,7 +263,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "industry",
       subcategory: "education",
       duration: "10年間",
-      timing: 0,
+      timing: 1,
     });
   }
 
@@ -281,7 +281,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "保育所（3歳以上）・小中学校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※保育所・小中学校在学中の給食費を全額助成\n※町内の保育所・小中学校に通う児童生徒が対象",
     });
@@ -295,7 +295,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "小中高在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※対象経費の80%以内を補助\n※大会参加費、交通費、宿泊費等が対象\n※予選やランキングで出場権を得た大会が対象",
     });
@@ -309,7 +309,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "小中学校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※片道100円×往復×25日×10ヶ月で計算\n※スクールバス利用の場合は停留所までの距離で判定",
     });
@@ -324,7 +324,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※JR列車、ふらのバス、占冠村営バスの定期券購入費を全額助成\n※町立高等学校に通学する生徒が対象",
     });
@@ -339,7 +339,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note:
         "※以下の費用を助成します：\n" +
@@ -361,7 +361,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※全道大会・全国大会参加時の費用を助成\n※町立高等学校の部活動が対象",
     });
@@ -375,7 +375,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 0,
+      timing: 1,
       isVariable: true,
       note: "※iPadと付属品を無償貸与（家庭でも使用可）\n※e-ラーニング教材・学習アプリケーションの利用料を全額支援\n※デジタル教材を活用した学習環境を提供",
     });
@@ -389,7 +389,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 0,
+      timing: 1,
       note: "※年間2～3名の派遣対象者を選考\n※渡航費用、滞在費等の主要な費用を補助\n※国際交流の貴重な機会を提供",
     });
   }
