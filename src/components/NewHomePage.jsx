@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Briefcase,
   Building2,
-  // ChevronDown,
   ChevronRight,
   GraduationCap,
   Heart,
@@ -15,7 +14,7 @@ import {
   Sun,
   TreePine,
   Users,
-} from "lucide-react"; // ChevronDownを追加
+} from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 
 const seasonImages = {
@@ -106,19 +105,6 @@ const NewHomePage = () => {
             </Link>
           </motion.div>
         </div>
-
-        {/* スクロールインジケーター */}
-        {/* <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-50" // z-20 を追加
-          animate={{ y: [0, 10, 0] }}
-          transition={{
-            repeat: Infinity,
-            duration: 2,
-            ease: "easeInOut",
-          }}
-        >
-          <ChevronDown className="text-white w-10 h-10" />
-        </motion.div> */}
       </section>
 
       {/* ----------------------- 支援制度セクション ----------------------------- */}

@@ -1,4 +1,4 @@
-//
+// SupportNavigator.jsx
 import React, { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { questions } from "../../data/questions";

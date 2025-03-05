@@ -15,7 +15,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "housing",
       subcategory: "construction",
       duration: "建設時",
-      timing: 2, // 2年後に家を建てる想定
+      timing: 0,
     });
   }
 
@@ -28,7 +28,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "housing",
       subcategory: "rent",
       duration: "5年間",
-      timing: 5, // 移住直後から
+      timing: 0, // 移住直後から
     });
   }
 
@@ -57,7 +57,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "agriculture",
         duration: "2年間",
-        timing: 1, // 1年後から開始
+        timing: 0,
       });
       break;
 
@@ -70,7 +70,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "agriculture",
         duration: "4年間",
-        timing: 1, // 1年後から開始
+        timing: 0,
       });
       break;
 
@@ -83,7 +83,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "business",
         duration: "創業時",
-        timing: 3, // 1年後
+        timing: 0,
       });
       break;
 
@@ -96,7 +96,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "industry",
         subcategory: "business",
         duration: "開発時",
-        timing: 2, // 2年後
+        timing: 0,
       });
       break;
 
@@ -214,7 +214,7 @@ export const calculateSupportPrograms = (answers) => {
         category: "living",
         subcategory: "childcare",
         duration: "出産時",
-        timing: 3,
+        timing: 0,
       });
 
       // おたふくかぜワクチン接種費用助成を追加
@@ -389,7 +389,7 @@ export const calculateSupportPrograms = (answers) => {
       category: "living",
       subcategory: "education",
       duration: "町立高校在学中",
-      timing: 2,
+      timing: 0,
       note: "※年間2～3名の派遣対象者を選考\n※渡航費用、滞在費等の主要な費用を補助\n※国際交流の貴重な機会を提供",
     });
   }
