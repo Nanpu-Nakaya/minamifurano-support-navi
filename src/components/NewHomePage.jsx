@@ -19,8 +19,8 @@ import {
 import { Card, CardContent } from "./ui/card";
 
 const seasonImages = {
-  spring: `${process.env.PUBLIC_URL}/images/kanayama_sp.jpg`,
-  summer: `${process.env.PUBLIC_URL}/images/kosui_su.jpg`,
+  spring: `${process.env.PUBLIC_URL}/images/kanayama_sp.JPG`,
+  summer: `${process.env.PUBLIC_URL}/images/kosui_su.JPG`,
   autumn: `${process.env.PUBLIC_URL}/images/kanayama_au.JPG`,
   winter: `${process.env.PUBLIC_URL}/images/ski_wi.jpg`,
 };
