@@ -1,3 +1,4 @@
+// LifeTimelineResults.jsx
 import React, { useState, useEffect, useRef } from "react";
 import {
   CartesianGrid,
@@ -42,12 +43,12 @@ const getCategoryLabel = (category, subcategory) => {
 const groupProgramsByMainCategory = (programs) => {
   const groupedPrograms = {
     "農業・林業分野": [],
-    "商工分野": [],
+    商工分野: [],
     "建設・水道分野": [],
-    "住宅分野": [],
-    "保健福祉分野": [],
-    "教育分野": [],
-    "その他": [], // 分類されないものを捕捉するカテゴリー
+    住宅分野: [],
+    保健福祉分野: [],
+    教育分野: [],
+    その他: [], // 分類されないものを捕捉するカテゴリー
   };
 
   programs.forEach((program) => {
@@ -200,10 +201,10 @@ const LifeTimelineResults = ({ results, onReset }) => {
       timeline.push({
         age: age,
         amount: yearlyAmounts[age],
-        cumulative: cumulativeAmount
+        cumulative: cumulativeAmount,
       });
     });
-    
+
     return timeline;
   };
 

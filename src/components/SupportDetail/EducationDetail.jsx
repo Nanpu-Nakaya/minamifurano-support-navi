@@ -1,11 +1,18 @@
 // EducationDetail.jsx
-import React from "react";
+import React, { useEffect } from "react";
 import { GraduationCap } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
 
 const EducationDetail = () => {
+  // コンポーネントがマウントされた時にページトップにスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // URLのハッシュから支援制度IDを抽出
   const hash = window.location.hash;
-  const supportId = hash.replace("#support-", "");
+  // "#/agriculture-support#support-5" のようなパターンにも対応
+  const supportIdMatch = hash.match(/#support-(\d+)/);
+  const supportId = supportIdMatch ? supportIdMatch[1] : "";
 
   // 支援制度IDに応じて表示内容を切り替える
   const renderContent = () => {

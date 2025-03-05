@@ -1,3 +1,4 @@
+// ResultsView.jsx
 import React from "react";
 import { ChevronLeft } from "lucide-react";
 

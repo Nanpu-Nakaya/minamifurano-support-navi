@@ -1,3 +1,4 @@
+// Header.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
@@ -13,7 +14,7 @@ const Header = () => {
           <div className="flex-shrink-0">
             <Link to="/">
               <img
-                src="/logomina01.png"
+                src={`${process.env.PUBLIC_URL}/logomina01.png`}
                 alt="南富良野町ロゴ"
                 className="h-12 w-auto"
               />

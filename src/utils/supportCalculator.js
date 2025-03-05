@@ -1,3 +1,4 @@
+// supportCalculator.js
 export const calculateSupportPrograms = (answers) => {
   const applicablePrograms = [];
 

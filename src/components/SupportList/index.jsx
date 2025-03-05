@@ -15,7 +15,7 @@ const SupportList = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  
+
   const categories = [
     {
       id: "housing",
@@ -144,7 +144,7 @@ const SupportList = () => {
                       key={item.id}
                       className="hover:shadow-md transition-shadow duration-200 cursor-pointer"
                     >
-                      <Link to={`${category.path}#support-${item.id}`}>
+                      <Link to={category.path + `#support-${item.id}`}>
                         <CardContent className="p-4">
                           <div className="flex justify-between items-center">
                             <span>{item.title}</span>

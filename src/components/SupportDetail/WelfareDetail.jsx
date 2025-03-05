@@ -1,11 +1,18 @@
-import React from "react";
+// WelfareDetail.jsx
+import React, { useEffect } from "react";
 import { Heart } from "lucide-react"; // ピンクのアイコン
 import { Card, CardContent } from "../ui/card";
 
 const WelfareDetail = () => {
-  // URLの#support-20などを取得して、どの支援制度を表示するか判断
+  // コンポーネントがマウントされた時にページトップにスクロール
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  // URLのハッシュから支援制度IDを抽出
   const hash = window.location.hash;
-  const supportId = hash.replace("#support-", "");
+  // "#/agriculture-support#support-5" のようなパターンにも対応
+  const supportIdMatch = hash.match(/#support-(\d+)/);
+  const supportId = supportIdMatch ? supportIdMatch[1] : "";
 
   // 支援制度IDに応じて表示内容を切り替える
   const renderContent = () => {

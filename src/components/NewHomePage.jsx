@@ -1,5 +1,4 @@
 // NewHomePage.jsx
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -20,10 +19,10 @@ import {
 import { Card, CardContent } from "./ui/card";
 
 const seasonImages = {
-  spring: "/images/kanayama_sp.jpg",
-  summer: "/images/kosui_su.jpg",
-  autumn: "/images/kanayama_au.jpg",
-  winter: "/images/ski_wi.jpg",
+  spring: `${process.env.PUBLIC_URL}/images/kanayama_sp.jpg`,
+  summer: `${process.env.PUBLIC_URL}/images/kosui_su.jpg`,
+  autumn: `${process.env.PUBLIC_URL}/images/kanayama_au.JPG`,
+  winter: `${process.env.PUBLIC_URL}/images/ski_wi.jpg`,
 };
 
 const NewHomePage = () => {
