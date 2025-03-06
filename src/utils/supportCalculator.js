@@ -20,16 +20,19 @@ export const calculateSupportPrograms = (answers) => {
   }
 
   if (answers.living_plan === "rent") {
-    applicablePrograms.push({
-      id: "rent_support",
-      name: "民間賃貸住宅家賃助成事業",
-      amount: 1500000,
-      description: "賃貸住宅の家賃補助（最長5年間）",
-      category: "housing",
-      subcategory: "rent",
-      duration: "5年間",
-      timing: 1, // 移住直後から
-    });
+    // 年齢が40歳未満（0～39歳）の場合のみ追加する
+    if (!answers.user_age || parseInt(answers.user_age) < 40) {
+      applicablePrograms.push({
+        id: "rent_support",
+        name: "民間賃貸住宅家賃助成事業",
+        amount: 1500000,
+        description: "賃貸住宅の家賃補助（最長5年間）",
+        category: "housing",
+        subcategory: "rent",
+        duration: "5年間",
+        timing: 1, // 移住直後から
+      });
+    }
   }
 
   // 移住時すぐに受けられる支援

@@ -199,14 +199,39 @@ const LifeTimelineResults = ({ results, onReset }) => {
       .sort((a, b) => a - b);
 
     let cumulativeAmount = 0;
-    ages.forEach((age) => {
-      cumulativeAmount += yearlyAmounts[age];
+
+    // 適用プログラムが少ない場合でもグラフを描画しやすくするための処理
+    if (ages.length <= 1) {
+      // 支援が1つしかない場合、グラフを5年間に分散表示する
+      const startAge = ages[0] || baseAge;
+
+      // 最初のポイント（支援開始時）
+      cumulativeAmount = yearlyAmounts[startAge] || 0;
       timeline.push({
-        age: age,
-        amount: yearlyAmounts[age],
+        age: startAge,
+        amount: cumulativeAmount,
         cumulative: cumulativeAmount,
       });
-    });
+
+      // 1年後、2年後、3年後、5年後のポイントを追加（金額は最初と同じ）
+      [1].forEach((yearOffset) => {
+        timeline.push({
+          age: startAge + yearOffset,
+          amount: 0,
+          cumulative: cumulativeAmount,
+        });
+      });
+    } else {
+      // 通常のケース（複数の支援がある場合）
+      ages.forEach((age) => {
+        cumulativeAmount += yearlyAmounts[age];
+        timeline.push({
+          age: age,
+          amount: yearlyAmounts[age],
+          cumulative: cumulativeAmount,
+        });
+      });
+    }
 
     return timeline;
   };
