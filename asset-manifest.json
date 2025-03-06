@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/css/main.03934458.css",
-    "main.js": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/main.7d8c88df.js",
+    "main.js": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/main.827d332b.js",
     "static/js/453.64f7ce1f.chunk.js": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/453.64f7ce1f.chunk.js",
     "index.html": "https://nanpu-nakaya.github.io/minamifurano-support-navi/index.html",
     "main.03934458.css.map": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/css/main.03934458.css.map",
-    "main.7d8c88df.js.map": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/main.7d8c88df.js.map",
+    "main.827d332b.js.map": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/main.827d332b.js.map",
     "453.64f7ce1f.chunk.js.map": "https://nanpu-nakaya.github.io/minamifurano-support-navi/static/js/453.64f7ce1f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.03934458.css",
-    "static/js/main.7d8c88df.js"
+    "static/js/main.827d332b.js"
   ]
 }
