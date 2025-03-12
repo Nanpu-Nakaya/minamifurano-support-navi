@@ -97,7 +97,7 @@ const SupportNavigator = () => {
             <div className="w-full max-w-xs mx-auto">
               <input
                 type="text" // あえてtextのまま
-                maxLength="2" // 最大長を3文字に制限
+                maxLength="2" // 最大長を2文字に制限
                 placeholder={currentQuestion.placeholder}
                 className="w-full p-4 text-left border rounded-lg hover:bg-gray-50 transition-colors"
                 onChange={(e) => {
