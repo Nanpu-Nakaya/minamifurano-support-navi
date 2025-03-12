@@ -52,16 +52,24 @@ export const calculateSupportPrograms = (answers) => {
   // 仕事関連支援 -------------------------------------------------------------
   switch (answers.work_style) {
     case "agriculture_new":
-      applicablePrograms.push({
-        id: "new_farmer_support",
-        name: "新規就農者等育成事業",
-        amount: 2400000,
-        description: "新規就農者への就農奨励金（年額120万円、2年間）",
-        category: "industry",
-        subcategory: "agriculture",
-        duration: "2年間",
-        timing: 1,
-      });
+      // 年齢が20歳以上46歳未満の場合にのみ実行
+      if (
+        answers.user_age &&
+        parseInt(answers.user_age) >= 20 &&
+        parseInt(answers.user_age) < 46
+      ) {
+        applicablePrograms.push({
+          id: "new_farmer_support",
+          name: "新規就農者等育成事業",
+          amount: 2400000,
+          description:
+            "新規就農者への就農奨励金（年額120万円、2年間）※新規就農前にも支援金があります。",
+          category: "industry",
+          subcategory: "agriculture",
+          duration: "2年間",
+          timing: 1,
+        });
+      }
       break;
 
     case "agriculture_successor":

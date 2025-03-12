@@ -9,6 +9,7 @@ const SupportNavigator = () => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});
   const [results, setResults] = useState(null);
+  const [ageError, setAgeError] = useState(""); // 年齢入力のエラーメッセージ用state
 
   const handleSelect = (questionId, answerId) => {
     setAnswers((prev) => ({
@@ -38,6 +39,7 @@ const SupportNavigator = () => {
     setStep(0);
     setAnswers({});
     setResults(null);
+    setAgeError(""); // エラーメッセージもリセット
   };
 
   // 結果表示中の場合
@@ -94,31 +96,49 @@ const SupportNavigator = () => {
           {currentQuestion.type === "number" ? (
             <div className="w-full max-w-xs mx-auto">
               <input
-                type="text" // number から text に変更
+                type="text" // あえてtextのまま
+                maxLength="2" // 最大長を3文字に制限
                 placeholder={currentQuestion.placeholder}
                 className="w-full p-4 text-left border rounded-lg hover:bg-gray-50 transition-colors"
                 onChange={(e) => {
-                  // 全角数字を半角数字に変換
-                  const convertedValue = e.target.value.replace(
-                    /[０-９]/g,
-                    (s) => String.fromCharCode(s.charCodeAt(0) - 65248)
+                  const value = e.target.value;
+
+                  // 1. 全角数字を半角数字に変換
+                  const hankakuValue = value.replace(/[０-９]/g, (s) =>
+                    String.fromCharCode(s.charCodeAt(0) - 0xfee0)
                   );
 
-                  // 数値以外の文字を取り除く
-                  const cleanValue = convertedValue.replace(/[^0-9]/g, "");
+                  // 2. 半角数字以外の文字をすべて除去
+                  const sanitizedValue = hankakuValue.replace(/[^0-9]/g, "");
 
-                  // 空文字でなければ数値に変換
-                  if (cleanValue) {
-                    const age = parseInt(cleanValue, 10);
+                  // 3. 先頭の0を除去 (00018 -> 18)
+                  const normalizedValue = sanitizedValue.replace(/^0+/, "");
+
+                  // 4. エラーメッセージを初期化
+                  setAgeError("");
+
+                  // 5. 空文字でなければ、数値に変換して範囲チェック
+                  if (normalizedValue !== "") {
+                    const numAge = parseInt(normalizedValue, 10);
                     if (
-                      age >= currentQuestion.min &&
-                      age <= currentQuestion.max
+                      numAge >= currentQuestion.min &&
+                      numAge <= currentQuestion.max
                     ) {
-                      handleSelect(currentQuestion.id, age);
+                      handleSelect(currentQuestion.id, numAge);
+                    } else {
+                      // 範囲外の場合はエラーメッセージを設定
+                      setAgeError(
+                        `${currentQuestion.min}歳から${currentQuestion.max}歳の間で入力してください`
+                      );
                     }
+                  } else {
+                    // 空の場合は処理をしない、またはエラーメッセージを設定(必要に応じて)
                   }
                 }}
               />
+              {ageError && (
+                <p className="mt-2 text-red-500 text-sm">{ageError}</p>
+              )}
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
