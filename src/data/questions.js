@@ -95,7 +95,7 @@ export const questions = [
         id: "business",
         label: "起業・お店を開きたい",
         icon: Briefcase,
-        description: "創業支援制度があります",
+        description: "起業支援制度があります",
         iconBackground: "bg-blue-100",
       },
       {
