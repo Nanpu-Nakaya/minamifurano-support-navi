@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://nanpu-nakaya.github.io/minamifurano-support-navi",
   "gh-pages": {
-    "repo": "git@github-sub:Nanpu-Nakaya/minamifurano-support-navi.git"
+    "repo": "https://github.com/Nanpu-Nakaya/minamifurano-support-navi.git"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
