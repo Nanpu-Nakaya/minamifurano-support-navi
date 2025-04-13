@@ -77,3 +77,40 @@ winter: `${process.env.PUBLIC_URL}/images/ski_wi.jpg`,
 支援一覧ページが開かないバグの修正
 レイアウトの微調整
 軽微なバグ修正
+
+## 著作権とライセンスについて
+
+このプロジェクト「南富良野支援ナビ - Minamifurano Support Navi」は、南富良野町における移住・定住支援制度の見える化を目的として、個人（Yoshihiko Nakaya）が自発的に開発したものです。
+
+生成 AI（主に Claude、ChatGPT、Gemini）を活用しつつ、プロンプト設計・構成・実装・デバッグを開発者本人が行っています。
+
+本アプリケーションの著作権は、開発者 Yoshihiko Nakaya に帰属します。
+
+ライセンスは MIT ライセンスとし、以下の条件に従えば自由に利用・改変・再配布が可能です：
+
+- 著作権表示と本ライセンス条文を含めること
+- 利用・改変によって生じた不具合等に関して、開発者は一切責任を負いません
+
+---
+
+MIT License
+
+Copyright (c) 2025 Yoshihiko Nakaya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy  
+of this software and associated documentation files (the "Software"), to deal  
+in the Software without restriction, including without limitation the rights  
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell  
+copies of the Software, and to permit persons to whom the Software is  
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all  
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR  
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,  
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE  
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER  
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,  
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  
+SOFTWARE.
